@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="/icons/games.webp">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/add-genre.css">
+    <title><%= title %></title>
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %>
+    </header>
+
+    <main>
+        <h2><%= title %></h2>
+
+        <% if (errors && errors.length) { %>
+            <div class="error-container">
+                <ul class="error-list">
+                    <% errors.forEach(err => { %>
+                        <li><%= err.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+
+        <form action="<%= action %>" method="post">
+            
+            <div class="genre-name">
+                <label for="genre"><p>Genre</p></label>
+                <input 
+                    type="text" 
+                    id="genre" 
+                    name="genre" 
+                    value="<%= formData?.genre || '' %>"
+                >
+            </div>
+
+            <div class="genre-color">
+                <label for="color"><p>Click to choose color</p></label>
+                <input 
+                    type="color" 
+                    name="color" 
+                    value="<%= formData?.color || '#ffffff' %>"
+                >
+            </div>
+
+            <button type="submit">
+                <%= title.includes('Editing') ? 'Update Genre' : 'Add Genre' %>
+            </button>
+        </form>
+    </main>
+
+    <%- include('partials/footer') %>
+</body>
+</html>

@@ -1,4 +1,5 @@
 const pool = require('./pool');
+const { gamesOrderClause } = require('./utils');
 
 // CREATE
 const createGame = async (game) => {
@@ -15,8 +16,24 @@ const createGame = async (game) => {
 };
 
 // READ
-const getAllGames = async () => {
-    const { rows } = await pool.query(`SELECT * FROM games`);
+const getAllGames = async (orderBy) => {
+    const orderBySQLClause = gamesOrderClause(orderBy);
+    const query = `SELECT * FROM games ${orderBySQLClause}`;
+    const { rows } = await pool.query(query);
+    return rows;
+};
+
+const getGamesByGenreId = async (genreId, orderBy) => {
+    const orderBySQLClause = gamesOrderClause(orderBy);
+
+    const id = Number(genreId);
+    if (Number.isNaN(id)) throw new Error('Invalid genreId');
+
+    const { rows } = await pool.query(
+        `SELECT * FROM games WHERE genre_id = $1 ${orderBySQLClause}`,
+        [id]
+    );
+
     return rows;
 };
 
@@ -25,24 +42,10 @@ const getGameById = async (id) => {
     return rows[0];
 };
 
-// Read filters
-const getGamesByPriceAsc = async () => {
-    const { rows } = await pool.query(`SELECT * FROM games ORDER BY price ASC`);
-    return rows;
-};
+const searchGames = async (query) => {
+    const { rows } = await pool.query(`SELECT * FROM games WHERE title ILIKE $1`, [`%${query}%`]
+    );
 
-const getGamesByPriceDesc = async () => {
-    const { rows } = await pool.query(`SELECT * FROM games ORDER BY price DESC`);
-    return rows;
-};
-
-const getGamesByNameAsc = async () => {
-    const { rows } = await pool.query(`SELECT * FROM games ORDER BY title ASC`);
-    return rows;
-};
-
-const getGamesByNameDesc = async () => {
-    const { rows } = await pool.query(`SELECT * FROM games ORDER BY title DESC`);
     return rows;
 };
 
@@ -76,11 +79,9 @@ const deleteGame = async (id) => {
 module.exports = {
     createGame,
     getAllGames,
+    getGamesByGenreId,
     getGameById,
-    getGamesByPriceAsc,
-    getGamesByPriceDesc,
-    getGamesByNameAsc,
-    getGamesByNameDesc,
+    searchGames,
     updateGame,
     deleteGame,
 };

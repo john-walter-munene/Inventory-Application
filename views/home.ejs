@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="icon" href="/icons/games.webp">
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/home.css">
+        <script src="/js/header.js" defer></script>
+        <title>Gamies</title>
+    </head>
+
+    <body>
+
+        <header>
+            <%- include('partials/header') %>
+        </header>
+
+        <main>
+            <!-- HERO / WELCOME -->
+            <section class="hero">
+                <h1>Welcome to Gamies, A digital modern game management inventory hub</h1>
+                <p>
+                    Build and manage your game collection with ease. Start by creating genres,
+                    then add games and keep everything organized in one place.
+                </p>
+
+                <div class="cta-links">
+                    <a href="/genres">Create or View Genres →</a>
+                    <a href="/games">Browse Games →</a>
+                </div>
+            </section>
+
+            <section class="how-it-works">
+                <h2>How It Works</h2>
+
+                <div class="steps">
+                    <div class="step">
+                        <h3>1. Create Genres</h3>
+                        <p>Start by setting up categories for your games.</p>
+                    </div>
+
+                    <div class="step">
+                        <h3>2. Add Games</h3>
+                        <p>Add games and assign them to a genre.</p>
+                    </div>
+
+                    <div class="step">
+                        <h3>3. Browse & Manage</h3>
+                        <p>Sort and explore your collection anytime.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <%- include ('partials/footer') %>
+    </body>
+</html>
