@@ -1,0 +1,108 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  flex: 1;
+  padding: 120px 20px 40px; /* top padding fixes header overlap */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 40px;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  color: rgb(119, 29, 29);
+}
+
+.hero p {
+  line-height: 1.5;
+}
+
+/* CTA */
+.cta-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cta-links a {
+  text-decoration: none;
+  padding: 12px;
+  border: 2px solid rgb(119, 29, 29);
+  border-radius: 10px;
+  text-align: center;
+  color: rgb(119, 29, 29);
+}
+
+.cta-links a:hover {
+  background: rgb(119, 29, 29);
+  color: white;
+}
+
+/* HOW IT WORKS */
+.how-it-works {
+  background: rgba(97, 228, 176, 0.06);
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.step {
+  background: white;
+  border: 1px solid rgba(119, 29, 29, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.step:hover {
+  transform: translateY(-2px);
+}
+
+/* FOOTER */
+footer {
+  background: rgb(119, 29, 29);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* DESKTOP */
+@media (min-width: 961px) {
+
+  main {
+    padding: 120px 80px 40px;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .cta-links {
+    flex-direction: row;
+  }
+
+  .steps {
+    flex-direction: row;
+  }
+
+  .step {
+    flex: 1;
+  }
+}

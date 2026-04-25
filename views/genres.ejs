@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="/icons/games.webp">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/genre.css">
+    <script src="/js/header.js" defer></script>
+    <title>Home</title>
+</head>
+
+<body>
+    <div class="gem-games">
+        <%- include('partials/header') %>
+    </div>
+
+    <main>
+        <div class="create-genre">
+            <h2>Genres</h2>
+            <a href="/genres/new" class="btn">Add Category</a>
+        </div>
+
+        <ul class="game-genres">
+            <% for (let i = 0; i < genres.length; i++) { %>
+                <% const { id, name, color } = genres[i]; %>
+
+                <li class="genre">
+                    <div class="genre-card-wrapper">
+
+                        <a href="/games?genre=<%= id %>" 
+                         class="genre-card"style="background-color: <%= color %>;"><%= name %></a>
+
+                        <!-- Actions -->
+                        <div class="genre-actions">
+                            <!-- View -->
+                            <a href="/genres/<%= id %>" class="icon view" title="View">👁️</a>
+
+                            <!-- Edit -->
+                            <a href="/genres/<%= id %>/edit" class="icon edit" title="Edit">✏️</a>
+
+                            <!-- Delete -->
+                            <form action="/genres/<%= id %>/delete" method="POST">
+                                <button type="submit" class="icon delete" title="Delete">
+                                    🗑️
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            <% } %>
+        </ul>
+
+    </main>
+
+    <!-- Footer -->
+    <%- include ('partials/footer') %>
+</body>
+</html>

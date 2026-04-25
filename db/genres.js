@@ -1,6 +1,6 @@
 const pool = require('./pool');
 
-// Interacting with Genres
+// Interacting with genres
 // Create genres
 const createAGenre = async (genre) => {
     const { name, color } = genre;
@@ -15,15 +15,19 @@ const createAGenre = async (genre) => {
 
 // Read genres and other entities relying on genre
 const getAllGenres = async () => {
-    const { rows } = await pool.query(`SELECT * FROM genres`);
+    const { rows } = await pool.query(`SELECT * FROM genres ORDER BY created_at ASC`);
     return rows;
-}
+};
 
-const getGamesInASpecificGenre = async (genreId) => {
-    const id = Number(genreId);
-    const { rows } = await pool.query(`SELECT * FROM games WHERE genre_id = $1`, [id]);
-    return rows;
-}
+// Read a specific genre
+const getGenreById = async (id) => {
+    const { rows } = await pool.query(
+        `SELECT * FROM genres WHERE id = $1`,
+        [id]
+    );
+
+    return rows[0];
+};
 
 // Update genres
 const updateASpecificGenre = async (genre) => {
@@ -39,9 +43,18 @@ const updateASpecificGenre = async (genre) => {
 
 // Delete genre
 const deleteGenre = async (genreId) => {
-    const { rows } = await pool.query(`DELETE FROM genres WHERE id = $1 RETURNING *`, [genreId]);
+    const { rows } = await pool.query(
+        `DELETE FROM genres WHERE id = $1 RETURNING *`,
+        [genreId]
+    );
 
     return rows[0];
 };
 
-module.exports = { createAGenre, getAllGenres, getGamesInASpecificGenre, updateASpecificGenre, deleteGenre };
+module.exports = { 
+    createAGenre, 
+    getAllGenres, 
+    getGenreById,
+    updateASpecificGenre, 
+    deleteGenre 
+};

@@ -15,10 +15,13 @@ app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 
 // Routes.
-app.get("/", (req, res) => {
-    console.log("App is well setup...");
-    res.send("App is working");
-});
+const indexRouter = require('./routes/indexRouter');
+const genresRouter = require('./routes/genresRouter');
+const gamesRouter = require('./routes/gamesRouter');
+
+app.use('/', indexRouter);
+app.use('/genres', genresRouter);
+app.use('/games', gamesRouter)
 
 // Error Handling
 app.use((error, request, response, next) => {
@@ -26,7 +29,6 @@ app.use((error, request, response, next) => {
     const statusCode = error.statusCode || 500;
     response.status(statusCode).send(error.message || "Internal Server Error");
 });
-
 
 const PORT = Number(process.env.PORT) || 3000;
 
