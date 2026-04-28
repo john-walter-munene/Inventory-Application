@@ -1,0 +1,261 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* main layout */
+main {
+  flex: 1;
+  padding: 120px 20px 40px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* filters */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 18px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(119, 29, 29, 0.18);
+  background: rgba(97, 228, 176, 0.05);
+}
+
+.filters h2 {
+  color: rgb(119, 29, 29);
+  font-size: 28px;
+}
+
+/* form */
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* groups */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-group h3 {
+  font-size: 18px;
+  color: rgb(119, 29, 29);
+}
+
+/* labels */
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* button */
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.filter-actions button {
+  width: fit-content;
+
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  border: 2px solid rgb(119, 29, 29);
+  background: transparent;
+
+  color: rgb(119, 29, 29);
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.filter-actions button:hover {
+  background: rgb(119, 29, 29);
+  color: white;
+}
+
+/* games list */
+.games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* cards wrapper */
+.games-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: flex-start;
+}
+
+/* game card */
+.game-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 100%;
+  max-width: 240px;
+
+  padding: 12px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(119, 29, 29, 0.18);
+  background: rgba(97, 228, 176, 0.05);
+
+  text-decoration: none;
+  color: inherit;
+
+  transition: transform 0.2s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-3px);
+}
+
+.game-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.game-info h3 {
+  font-size: 16px;
+  color: rgb(119, 29, 29);
+}
+
+.game-info p {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* empty */
+.games-list p {
+  color: rgb(119, 29, 29);
+  font-weight: bold;
+}
+
+footer {
+  background: rgb(119, 29, 29);
+  color: azure;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+footer p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+
+  main {
+    padding: 120px 40px 40px;
+  }
+
+  /* filters become compact row layout */
+  .filter-form {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  /* SORT: 2 columns */
+  .filter-form .filter-group:nth-of-type(1) {
+    flex: 1;
+    min-width: 200px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter-form .filter-group:nth-of-type(1) h3 {
+    width: 100%;
+  }
+
+  .filter-form .filter-group:nth-of-type(1) label {
+    width: calc(50% - 10px);
+  }
+
+  /* GENRES: 3 columns */
+  .filter-form .filter-group:nth-of-type(2) {
+    flex: 2;
+    min-width: 260px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter-form .filter-group:nth-of-type(2) h3 {
+    width: 100%;
+  }
+
+  .filter-form .filter-group:nth-of-type(2) label {
+    width: calc(33.33% - 10px);
+  }
+
+  /* button stays bottom right */
+  .filter-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  /* cards slightly tighter */
+  .game-card {
+    max-width: 220px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 961px) {
+
+  main {
+    padding: 120px 80px 40px;
+  }
+
+  .filters h2 {
+    font-size: 34px;
+  }
+
+  .game-card {
+    max-width: 200px;
+  }
+
+  .game-info h3 {
+    font-size: 18px;
+  }
+}

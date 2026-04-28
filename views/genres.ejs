@@ -29,13 +29,13 @@
                 <li class="genre">
                     <div class="genre-card-wrapper">
 
-                        <a href="/games?genre=<%= id %>" 
+                        <a href="/games/genre/<%=id %>" 
                          class="genre-card"style="background-color: <%= color %>;"><%= name %></a>
 
                         <!-- Actions -->
                         <div class="genre-actions">
                             <!-- View -->
-                            <a href="/genres/<%= id %>" class="icon view" title="View">👁️</a>
+                            <a href="/games/genre/<%= id %>" class="icon view" title="View">👁️</a>
 
                             <!-- Edit -->
                             <a href="/genres/<%= id %>/edit" class="icon edit" title="Edit">✏️</a>

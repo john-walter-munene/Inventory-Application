@@ -30,7 +30,13 @@ const getGamesByGenreId = async (genreId, orderBy) => {
     if (Number.isNaN(id)) throw new Error('Invalid genreId');
 
     const { rows } = await pool.query(
-        `SELECT * FROM games WHERE genre_id = $1 ${orderBySQLClause}`,
+        `SELECT 
+            games.*,
+            genres.name AS genre_name,
+            genres.color AS genre_color
+        FROM games
+        JOIN genres ON games.genre_id = genres.id 
+        WHERE games.genre_id = $1 ${orderBySQLClause}`,
         [id]
     );
 
@@ -38,14 +44,45 @@ const getGamesByGenreId = async (genreId, orderBy) => {
 };
 
 const getGameById = async (id) => {
-    const { rows } = await pool.query(`SELECT * FROM games WHERE id = $1`, [id]);
+    const { rows } = await pool.query(
+        `
+        SELECT 
+            games.*,
+            genres.name AS genre_name,
+            genres.color AS genre_color
+        FROM games
+        JOIN genres ON games.genre_id = genres.id
+        WHERE games.id = $1
+        `,
+        [id]
+    );
+
     return rows[0];
 };
 
 const searchGames = async (query) => {
-    const { rows } = await pool.query(`SELECT * FROM games WHERE title ILIKE $1`, [`%${query}%`]
+    const orderBySQLClause = gamesOrderClause('title-ascending');
+    const { rows } = await pool.query(`SELECT * FROM games WHERE title ILIKE $1 ${orderBySQLClause}`, [`%${query}%`]
     );
+    return rows;
+};
 
+const getGamesFiltered = async ({ genresList = [], order }) => {
+    let query = `SELECT * FROM games`;
+    let params = [];
+
+    // Add genre filtering to query
+    if (genresList.length > 0) {
+        params.push(genresList);
+        query += ` WHERE genre_id = ANY($1)`;
+    }
+
+    // Add ordering to the query
+    const orderBySQLClause = gamesOrderClause(order);
+    query += ` ${orderBySQLClause}`;
+
+    // Execute query
+    const { rows } = await pool.query(query, params);
     return rows;
 };
 
@@ -62,8 +99,7 @@ const updateGame = async (game) => {
                 image_url = $5,
                 genre_id = $6,
                 updated_at = NOW()
-            WHERE id = $7
-            RETURNING *`,
+            WHERE id = $7 RETURNING *`,
         [title, description, price, quantity, image_url, genre_id, id]
     );
 
@@ -82,6 +118,7 @@ module.exports = {
     getGamesByGenreId,
     getGameById,
     searchGames,
+    getGamesFiltered,
     updateGame,
     deleteGame,
 };

@@ -15,9 +15,9 @@
             <a href="/games">Games</a>
         </nav>
 
-        <form class="search">
-            <input type="text" placeholder="Search Games...">
-            <button>Search</button>
+        <form class="search" action="/games/search" method="get">
+            <input type="text" name="search" placeholder="Search Games..." required>
+            <button type="submit">Search</button>
         </form>
     </div>
 </div>
