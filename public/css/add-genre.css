@@ -9,10 +9,10 @@ main {
 }
 
 main {
-  padding: 140px 20px 60px; /* keeps fixed header safe spacing */
+  padding: 140px 20px 60px;
 }
 
-/* PAGE TITLE */
+/* Title */
 main h2 {
   font-size: 28px;
   color: rgb(119, 29, 29);
@@ -20,7 +20,7 @@ main h2 {
   margin-bottom: 20px;
 }
 
-/* FORM WRAPPER */
+/* Form Wrapper */
 main form {
   width: 100%;
   max-width: 500px;
@@ -37,7 +37,7 @@ main form {
   gap: 20px;
 }
 
-/* GROUPS */
+/* Groups */
 .genre-name,
 .genre-color {
   display: flex;
@@ -45,13 +45,13 @@ main form {
   gap: 8px;
 }
 
-/* LABELS */
+/* Labels */
 label p {
   font-weight: bold;
   color: rgb(119, 29, 29);
 }
 
-/* INPUT TEXT */
+/* Input text */
 input[type="text"] {
   padding: 12px;
   border: 1px solid rgba(119, 29, 29, 0.3);
@@ -59,14 +59,14 @@ input[type="text"] {
   font-size: 16px;
 }
 
-/* INPUT FOCUS */
+/* Input focus */
 input[type="text"]:focus {
   outline: none;
   border-color: rgb(119, 29, 29);
   box-shadow: 0 0 0 4px rgba(119, 29, 29, 0.15);
 }
 
-/* COLOR INPUT */
+/* Color Input */
 input[type="color"] {
   width: 80px;            /* better than % for control */
   height: 45px;
@@ -100,7 +100,7 @@ input[type="color"]::-moz-color-swatch {
   border-radius: 6px;
 }
 
-/* BUTTON */
+/* Button */
 button {
   padding: 12px;
   border-radius: 10px;
@@ -117,7 +117,7 @@ button:hover {
   color: rgb(119, 29, 29);
 }
 
-/* FOOTER */
+/* Footer*/
 footer {
   background: rgb(119, 29, 29);
   color: white;
@@ -125,7 +125,7 @@ footer {
   text-align: center;
 }
 
-/* DESKTOP */
+/* Desktop */
 @media (min-width: 961px) {
   main {
     padding: 140px 80px 60px;
@@ -140,7 +140,7 @@ footer {
   }
 }
 
-/* ERROR CONTAINER */
+/* Error Container*/
 .error-container {
   max-width: 500px;
   margin: 0 auto 20px;
@@ -152,13 +152,13 @@ footer {
   padding: 12px 16px;
 }
 
-/* ERROR LIST */
+/* Errors list */
 .error-list {
   margin: 0;
   padding-left: 18px;
 }
 
-/* ERROR ITEMS */
+/* Error items */
 .error-list li {
   color: rgb(231, 76, 60);
   font-weight: bold;

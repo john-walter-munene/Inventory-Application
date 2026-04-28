@@ -1,28 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="icon" href="/icons/games.webp">
-        <link rel="stylesheet" href="/css/header.css">
-        <link rel="stylesheet" href="/css/home.css">
-        <script src="/js/header.js" defer></script>
-        <title>Home</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
 
-    <body>
-        <div class="gem-games">
-            <%- include('partials/header') %>
-        </div>
+    <link rel="icon" href="/icons/games.webp">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/games.css">
+</head>
 
-        <main>
-            <h2>This is Games Page...</h2>
-        </main>
+<body>
 
-        <!-- FOOTER -->
-        <footer>
-            <p>© 2026 Games Inventory App By John Walter</p>
-        </footer>
-    </body>
+    <%- include('partials/header') %>
+
+    <main>
+
+        <!-- FILTERS -->
+        <section class="filters">
+
+            <h2>Browse Games</h2>
+
+            <form method="GET" action="/games" class="filter-form">
+
+                <!-- SORT -->
+                <div class="filter-group">
+                    <h3>Sort By</h3>
+
+                    <label><input type="radio" name="order" value="title-ascending" checked> A → Z</label>
+                    <label><input type="radio" name="order" value="title-descending"> Z → A</label>
+                    <label><input type="radio" name="order" value="price-ascending"> Price ↑</label>
+                    <label><input type="radio" name="order" value="price-descending"> Price ↓</label>
+                </div>
+
+                <!-- GENRES -->
+                <div class="filter-group">
+                    <h3>Genres</h3>
+
+                    <% for (let i = 0; i < genres.length; i++) { %>
+                        <% const g = genres[i]; %>
+
+                        <label>
+                            <input type="checkbox" name="genres[]" value="<%= g.id %>">
+                            <span style="color: <%= g.color %>"><%= g.name %></span>
+                        </label>
+
+                    <% } %>
+                </div>
+
+                <!-- BUTTON -->
+                <div class="filter-actions">
+                    <button type="submit">Apply Filters</button>
+                </div>
+
+            </form>
+
+        </section>
+
+        <!-- RESULTS -->
+        <section class="games-list">
+
+            <% if (games.length > 0) { %>
+
+                <div class="games-grid">
+
+                    <% for (let i = 0; i < games.length; i++) { %>
+                        <% const game = games[i]; %>
+
+                        <a href="/games/<%= game.id %>" class="game-card">
+
+                            <img src="<%= game.image_url %>" alt="<%= game.title %>">
+
+                            <div class="game-info">
+                                <h3><%= game.title %></h3>
+                                <p><%= game.description %></p>
+                                <p class="price">$ <%= game.price %></p>
+                            </div>
+
+                        </a>
+
+                    <% } %>
+
+                </div>
+
+            <% } else { %>
+
+                <p>No games found.</p>
+
+            <% } %>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <%- include ('partials/footer') %>
+
+</body>
 </html>

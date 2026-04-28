@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= game.title %></title>
+
+    <link rel="icon" href="/icons/games.webp">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/game.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+    <main>
+
+        <!-- BACK LINK -->
+        <section class="back">
+            <a href="/games" class="back-link">← Return to Products</a>
+        </section>
+
+        <!-- GAME CARD -->
+        <section class="game-container">
+
+            <div class="game-card">
+
+                <div class="game-image">
+                    <img src="<%= game.image_url %>" alt="<%= game.title %>">
+                </div>
+
+                <div class="game-info">
+
+                    <h1><%= game.title %></h1>
+                    <p class="price">$ <%= game.price %></p>
+                    <p class="genre">Genre: <%= game.genre_name %></p>
+                    <p class="description"><%= game.description %></p>
+                    <p class="quantity">Quantity: <%= game.quantity %></p>
+                    <!-- ACTIONS -->
+                    <div class="actions">
+
+                        <a href="/games/<%= game.id %>/edit" class="btn edit">Edit</a>
+
+                        <form action="/games/<%= game.id %>/delete" method="POST">
+                            <button type="submit" class="btn delete">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

@@ -10,7 +10,7 @@ body {
   background: #fff;
 }
 
-/* FIX: offset fixed header (header unchanged) */
+/* Offest main content from header */
 main {
   margin-top: 80px;
 
@@ -72,13 +72,13 @@ main {
   align-items: stretch;
 }
 
-/* FLEX ITEM */
+/* Flex item*/
 .genre {
   flex: 1 1 380px;
   display: flex;
 }
 
-/* WRAPPER (POSITIONING CONTEXT) */
+/* Wrapper positioning context */
 .genre-card-wrapper {
   position: relative;
   width: 100%;
@@ -87,7 +87,7 @@ main {
   display: flex;
 }
 
-/* CARD (FLEX FILL) */
+/* Card flex fill */
 .genre-card {
   flex: 1;
 
@@ -108,11 +108,11 @@ main {
 }
 
 .genre-card:hover {
-  transform: translateY(-4px);
+  transform: scale(1.05);
   box-shadow: 0 10px 18px rgba(0,0,0,0.18);
 }
 
-/* ACTIONS (OVERLAY INSIDE CARD) */
+/* Actions: Overall inside card */
 .genre-actions {
   position: absolute;
   bottom: 10px;
@@ -122,7 +122,7 @@ main {
   gap: 8px;
 }
 
-/* ICON BASE */
+/* Icons base */
 .icon {
   width: 32px;
   height: 32px;
@@ -160,7 +160,7 @@ main {
   border: none;
 }
 
-/* FOOTER */
+/* Footer */
 footer {
   background: rgb(119, 29, 29);
   color: azure;

@@ -1,0 +1,168 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  flex: 1;
+  padding: 120px 20px 40px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* BACK */
+.back {
+  display: flex;
+}
+
+.back-link {
+  text-decoration: none;
+  color: rgb(119, 29, 29);
+
+  border: 2px solid rgb(119, 29, 29);
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.back-link:hover {
+  background: rgb(119, 29, 29);
+  color: white;
+}
+
+/* CONTAINER */
+.game-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* CARD */
+.game-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 100%;
+  max-width: 800px;
+
+  padding: 20px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(119, 29, 29, 0.18);
+  background: rgba(97, 228, 176, 0.05);
+}
+
+/* IMAGE */
+.game-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+
+  border-radius: 12px;
+}
+
+/* INFO */
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.game-info h1 {
+  color: rgb(119, 29, 29);
+  font-size: 28px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.genre,
+.brand,
+.quantity {
+  font-weight: bold;
+}
+
+.description {
+  line-height: 1.5;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  border: 2px solid rgb(119, 29, 29);
+  background: transparent;
+
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  background: rgb(119, 29, 29);
+  color: white;
+}
+
+.delete {
+  border-color: darkred;
+  color: darkred;
+}
+
+.delete:hover {
+  background: darkred;
+  color: white;
+}
+
+/* Footer */
+footer {
+  background: rgb(119, 29, 29);
+  color: azure;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+footer p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+
+  .game-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .game-image {
+    width: 350px;
+  }
+
+  .game-image img {
+    height: 100%;
+    min-height: 300px;
+  }
+
+  .game-info {
+    flex: 1;
+    justify-content: center;
+  }
+}

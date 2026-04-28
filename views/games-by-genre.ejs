@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="/icons/games.webp">
+
+    <title>Games by Genre</title>
+
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/games-by-genre.css">
+</head>
+<body>
+
+    <header>
+        <%- include('partials/header') %>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="search-hero">
+            <h2>Games in "<%= genreName %>"</h2>
+
+            <p>
+                <% if (results.length > 0) { %>
+                    Found <%= results.length %> game(s) in this genre.
+                <% } else { %>
+                    No games found in this genre.
+                <% } %>
+            </p>
+
+            <a href="/genres" class="back-link">← Return to Genres</a>
+        </section>
+
+        <!-- RESULTS -->
+        <section class="search-results">
+
+            <% if (results.length > 0) { %>
+
+                <div class="results-grid">
+                    <% for (let i = 0; i < results.length; i++) { %>
+                        <% const game = results[i]; %>
+                        <article class="game-card">
+
+                            <div class="game-image">
+                                <img src="<%= game.image_url %>" alt="<%= game.title %>">
+                            </div>
+
+                            <div class="game-details">
+                                <h3><%= game.title %></h3>
+                                <p class="genre">Genre: <%= game.genre_name || genreName %></p>
+                                <p class="description"><%= game.description %></p>
+                                <div class="meta">
+                                    <span>$ <%= game.price %></span>
+                                    <span>Stock: <%= game.quantity %></span>
+                                </div>
+                                <a href="/games/<%= game.id %>" class="view-btn">View Game</a>
+                            </div>
+                        </article>
+                    <% } %>
+                </div>
+            <% } else { %>
+
+                <div class="empty-state">
+                    <h3>No Games Available</h3>
+
+                    <p>Try another genre or browse all games.</p>
+
+                    <a href="/games" class="view-btn">Browse Games</a>
+                </div>
+            <% } %>
+
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>
