@@ -67,8 +67,10 @@ async function main() {
     console.log("Seeding...");
 
     const client = new Client({
-        connectionString: `postgresql://${user}:${password}@${host}:${port}/${dbName}`,
+	    connectionString: dbUrl || `postgresql://${user}:${password}@${host}:${port}/${dbName}`,
+	    ssl: dbUrl ? { rejectUnauthorized: false } : undefined,
     });
+
 
     try {
         await client.connect();

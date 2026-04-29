@@ -1,33 +1,30 @@
-const { body, validationResult, matchedData } = require('express-validator');
+const { matchedData, validationResult } = require('express-validator');
+
 const db = require('../db/genres');
-
-// Genres validation.
-const validateGenre = [
-    body('genre')
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('Genre must be at least 3 characters'),
-
-    body('color')
-        .notEmpty()
-        .withMessage('Please select a color'),
-];
+const CustomNotFoundError = require('../errors/CustomNotFoundError');
+const { validateGenre } = require('../middleware/validation');
 
 // Get all the categories
 const getAllGenres = async (request, response) => {
     const genres = await db.getAllGenres();
+    if (!genres) throw new CustomNotFoundError('No Genres Found');
     response.render('genres', { genres });
 };
 
+// Handle the get request for add a new genre form
 const getAddNewGenreForm = (request, response) => {
     response.render('add-genre', {
         title: 'Add a new genre',
         action: '/genres/new',
         errors: [],
-        formData: { genre: '', color: '#ffffff' }
+        formData: {
+            genre: '',
+            color: '#ffffff',
+        },
     });
 };
 
+// Handle the post request for add a new genre form
 const postAddNewGenreForm = [
     validateGenre,
 
@@ -39,40 +36,42 @@ const postAddNewGenreForm = [
                 title: 'Add a new genre',
                 action: '/genres/new',
                 errors: errors.array(),
-                formData: request.body
+                formData: request.body,
             });
         }
 
+        // Get needed data and clean it up
         let { genre, color } = matchedData(request);
 
         genre = genre.trim();
         genre = genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase();
 
-        await db.createAGenre({ name: genre, color });
-
+        // Add data into the db, and redirect to overall genres.
+        await db.createAGenre({ color, name: genre });
         return response.redirect('/genres');
     },
 ];
 
+/* Edit a form */
 const getEditGenreForm = async (request, response) => {
     const { id } = request.params;
 
     const genreInEdit = await db.getGenreById(Number(id));
 
-    if (!genreInEdit) {
-        return response.status(404).send("Genre not found!");
-    }
+    // Throw error if genre is not found.
+    if (!genreInEdit) throw new CustomNotFoundError('Genre not Found');
 
+    // Proceed to render form with existing data
     const { name, color } = genreInEdit;
 
     response.render('add-genre', {
         title: 'Editing a genre',
-        action: `/genres/${id}/edit`, // ✅ FIXED
+        action: `/genres/${id}/edit`,
         errors: [],
         formData: {
             genre: name,
-            color
-        }
+            color,
+        },
     });
 };
 
@@ -81,40 +80,39 @@ const postEditGenreForm = [
 
     async (request, response) => {
         const { id } = request.params;
+
         const errors = validationResult(request);
 
+        // Validation error handling.
         if (!errors.isEmpty()) {
             return response.status(400).render('add-genre', {
                 title: 'Editing a genre',
-                action: `/genres/${id}/edit`, // ✅ FIXED
+                action: `/genres/${id}/edit`,
                 errors: errors.array(),
-                formData: request.body
+                formData: request.body,
             });
         }
 
+        // Prepre data for update
         let { genre, color } = matchedData(request);
 
         genre = genre.trim();
         genre = genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase();
 
-        const updatedGenre = await db.updateASpecificGenre({
-            id,
-            name: genre,
-            color
-        });
+        // Update data in db and retun new updated genre
+        const updatedGenre = await db.updateASpecificGenre({ id, color, name: genre, });
 
-        if (!updatedGenre) {
-            return response.status(404).send("Genre not found!");
-        }
-
+        // Throw error if operation fails else redirect to all genres.
+        if (!updatedGenre) throw new CustomNotFoundError('Genre not found');
         return response.redirect('/genres');
-    }
+    },
 ];
 
+/* Delete a genre */
 const postDeleteGenre = async (request, response) => {
     const { id } = request.params;
     const deletedGenre = await db.deleteGenre(Number(id));
-    if (!deletedGenre) return response.status(404).send("Genre not found!");
+    if (!deletedGenre) throw new CustomNotFoundError('The genre you are deleting does not exist!');
     return response.redirect('/genres');
 };
 
@@ -124,5 +122,5 @@ module.exports = {
     postAddNewGenreForm,
     getEditGenreForm,
     postEditGenreForm,
-    postDeleteGenre
+    postDeleteGenre,
 };

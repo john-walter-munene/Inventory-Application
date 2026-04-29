@@ -5,72 +5,101 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* main layout */
+/* MAIN */
 main {
   flex: 1;
-  padding: 120px 20px 40px;
+  padding: 120px 20px 20px;
 
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
-/* filters */
+/* FILTER BAR (TOP SECTION) */
 .filters {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 
-  padding: 18px;
+  padding: 12px 18px;
   border-radius: 14px;
 
   border: 1px solid rgba(119, 29, 29, 0.18);
   background: rgba(97, 228, 176, 0.05);
 }
 
-.filters h2 {
+/* HEADER ROW */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 24px;
   color: rgb(119, 29, 29);
-  font-size: 28px;
 }
 
-/* form */
-.filter-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* BUTTON */
+.btn {
+  text-decoration: none;
+
+  background: rgb(119, 29, 29);
+  color: azure;
+
+  padding: 10px 16px;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  border: 2px solid rgb(119, 29, 29);
+  transition: 0.2s ease;
 }
 
-/* groups */
-.filter-group {
+.btn:hover {
+  background: transparent;
+  color: rgb(119, 29, 29);
+}
+
+/* Filter bar */
+.filter-bar {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* INLINE GROUPS */
+.filter-group.inline {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-.filter-group h3 {
-  font-size: 18px;
+.filter-group.inline h3 {
+  margin: 0;
+  font-size: 14px;
   color: rgb(119, 29, 29);
 }
 
-/* labels */
+/* GENRES WRAP */
+.filter-group.inline.genres {
+  flex-wrap: wrap;
+}
+
+/* LABELS */
 .filter-group label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: 5px;
+  font-size: 13px;
 }
 
-/* button */
-.filter-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-}
-
-.filter-actions button {
-  width: fit-content;
-
-  padding: 10px 14px;
+/* APPLY BUTTON */
+.apply-btn {
+  padding: 8px 14px;
   border-radius: 10px;
 
   border: 2px solid rgb(119, 29, 29);
@@ -83,34 +112,34 @@ main {
   transition: 0.2s ease;
 }
 
-.filter-actions button:hover {
+.apply-btn:hover {
   background: rgb(119, 29, 29);
   color: white;
 }
 
-/* games list */
+/* GAME LIST */
 .games-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* cards wrapper */
 .games-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 15px;
-  justify-content: flex-start;
 }
 
-/* game card */
+/* GAME CARD */
 .game-card {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 
   width: 100%;
-  max-width: 240px;
+  max-width: 260px;
 
   padding: 12px;
   border-radius: 12px;
@@ -133,9 +162,9 @@ main {
   height: 140px;
   object-fit: cover;
   border-radius: 10px;
-  display: block;
 }
 
+/* TEXT */
 .game-info {
   display: flex;
   flex-direction: column;
@@ -149,7 +178,6 @@ main {
 
 .game-info p {
   font-size: 12px;
-  line-height: 1.3;
 }
 
 .price {
@@ -157,12 +185,7 @@ main {
   font-size: 13px;
 }
 
-/* empty */
-.games-list p {
-  color: rgb(119, 29, 29);
-  font-weight: bold;
-}
-
+/* FOOTER */
 footer {
   background: rgb(119, 29, 29);
   color: azure;
@@ -178,84 +201,22 @@ footer p {
 
 /* TABLET */
 @media (min-width: 768px) {
-
   main {
     padding: 120px 40px 40px;
   }
-
-  /* filters become compact row layout */
-  .filter-form {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-
-  /* SORT: 2 columns */
-  .filter-form .filter-group:nth-of-type(1) {
-    flex: 1;
-    min-width: 200px;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .filter-form .filter-group:nth-of-type(1) h3 {
-    width: 100%;
-  }
-
-  .filter-form .filter-group:nth-of-type(1) label {
-    width: calc(50% - 10px);
-  }
-
-  /* GENRES: 3 columns */
-  .filter-form .filter-group:nth-of-type(2) {
-    flex: 2;
-    min-width: 260px;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .filter-form .filter-group:nth-of-type(2) h3 {
-    width: 100%;
-  }
-
-  .filter-form .filter-group:nth-of-type(2) label {
-    width: calc(33.33% - 10px);
-  }
-
-  /* button stays bottom right */
-  .filter-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  /* cards slightly tighter */
-  .game-card {
-    max-width: 220px;
-  }
 }
 
-/* Desktop */
+/* DESKTOP */
 @media (min-width: 961px) {
-
   main {
     padding: 120px 80px 40px;
   }
 
   .filters h2 {
-    font-size: 34px;
+    font-size: 30px;
   }
 
   .game-card {
     max-width: 200px;
-  }
-
-  .game-info h3 {
-    font-size: 18px;
   }
 }

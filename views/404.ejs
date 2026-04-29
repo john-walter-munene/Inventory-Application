@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <link rel="icon" href="/icons/games.webp">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/404.css">
+
+  <script src="/js/header.js" defer></script>
+
+  <title>404 | Gamies</title>
+</head>
+
+<body>
+
+  <header>
+    <%- include('partials/header') %>
+  </header>
+
+  <main>
+    <section class="error-wrapper">
+      <div class="error-box">
+        <h1>404</h1>
+        <h2>Resource Not Found</h2>
+
+        <p>
+          The resource you are seeking is not available or could not be found.
+        </p>
+
+        <div class="error-actions">
+          <a href="/">Return Home</a>
+          <a href="/games">Browse Games</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+</body>
+</html>

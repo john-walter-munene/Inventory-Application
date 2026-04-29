@@ -26,8 +26,7 @@ app.use('/games', gamesRouter)
 // Error Handling
 app.use((error, request, response, next) => {
     console.log(error);
-    const statusCode = error.statusCode || 500;
-    response.status(statusCode).send(error.message || "Internal Server Error");
+    response.status(error.statusCode || 500).render('404');
 });
 
 const PORT = Number(process.env.PORT) || 3000;
