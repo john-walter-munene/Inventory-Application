@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games</title>
-
     <link rel="icon" href="/icons/games.webp">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/games.css">
+    <script src="/js/header.js" defer></script>
 </head>
 
 <body>
@@ -16,42 +16,70 @@
 
     <main>
 
-        <!-- FILTERS -->
+        <!-- FILTER / TOP BAR -->
         <section class="filters">
 
-            <h2>Browse Games</h2>
+            <div class="page-header">
+                <h2>Browse Games</h2>
 
-            <form method="GET" action="/games" class="filter-form">
+                <a href="/games/new" class="btn">
+                    Add Game
+                </a>
+            </div>
+
+            <form method="GET" action="/games" class="filter-bar">
 
                 <!-- SORT -->
-                <div class="filter-group">
-                    <h3>Sort By</h3>
+                <div class="filter-group inline">
+                    <h3>Sort</h3>
 
-                    <label><input type="radio" name="order" value="title-ascending" checked> A → Z</label>
-                    <label><input type="radio" name="order" value="title-descending"> Z → A</label>
-                    <label><input type="radio" name="order" value="price-ascending"> Price ↑</label>
-                    <label><input type="radio" name="order" value="price-descending"> Price ↓</label>
+                    <label>
+                        <input type="radio" name="order" value="title-ascending"
+                            <%= selectedOrder === 'title-ascending' ? 'checked' : '' %>
+                        > A→Z
+                    </label>
+
+                    <label>
+                        <input type="radio" name="order" value="title-descending"
+                            <%= selectedOrder === 'title-descending' ? 'checked' : '' %>
+                        > Z→A
+                    </label>
+
+                    <label>
+                        <input type="radio" name="order" value="price-ascending"
+                            <%= selectedOrder === 'price-ascending' ? 'checked' : '' %>
+                        > Price↑
+                    </label>
+
+                    <label>
+                        <input type="radio" name="order" value="price-descending"
+                            <%= selectedOrder === 'price-descending' ? 'checked' : '' %>
+                        > Price↓
+                    </label>
                 </div>
 
                 <!-- GENRES -->
-                <div class="filter-group">
+                <div class="filter-group inline genres">
                     <h3>Genres</h3>
 
                     <% for (let i = 0; i < genres.length; i++) { %>
                         <% const g = genres[i]; %>
 
                         <label>
-                            <input type="checkbox" name="genres[]" value="<%= g.id %>">
-                            <span style="color: <%= g.color %>"><%= g.name %></span>
+                            <input type="checkbox"
+                                name="genres"
+                                value="<%= g.id %>"
+                                <%= selectedGenres.includes(g.id) ? 'checked' : '' %>
+                            >
+                            <span style="color:<%= g.color %>"><%= g.name %></span>
                         </label>
 
                     <% } %>
                 </div>
 
-                <!-- BUTTON -->
-                <div class="filter-actions">
-                    <button type="submit">Apply Filters</button>
-                </div>
+                <button type="submit" class="apply-btn">
+                    Apply
+                </button>
 
             </form>
 
@@ -93,8 +121,7 @@
 
     </main>
 
-    <!-- Footer -->
-    <%- include ('partials/footer') %>
+    <%- include('partials/footer') %>
 
 </body>
 </html>

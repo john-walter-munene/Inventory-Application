@@ -9,29 +9,28 @@ const {
     getGamesSearchPage,
     getNewGameForm,
     postNewGame,
+    deleteGame,
     getEditGameForm,
-    postEditGame,
-    deleteGame
+    postEditGameForm,
 } = require('../controllers/gamesController');
 
-// browse catalog (filters, sorting, genre browsing, searching)
-
+// Read actions
 gamesRouter.get('/search', searchGames);
 gamesRouter.get('/genre/:id', getGamesByGenreId);
 gamesRouter.get('/', getAllGames);
 
-// // create
-// gamesRouter.get('/new', getNewGameForm);
-// gamesRouter.post('/new', postNewGame);
+// Create actions
+gamesRouter.get('/new', getNewGameForm);
+gamesRouter.post('/new', postNewGame);
 
-// // edit
-// gamesRouter.get('/:id/edit', getEditGameForm);
-// gamesRouter.post('/:id/edit', postEditGame);
+// Edit actions
+gamesRouter.get('/:id/edit', getEditGameForm);
+gamesRouter.post('/:id/edit', postEditGameForm);
 
-// // delete
-// gamesRouter.post('/:id/delete', deleteGame);
+// Delete actions
+gamesRouter.post('/:id/delete', deleteGame);
 
-// // single game view (keep last so it doesn't catch /search or /new)
+// Single game read: positioned last to avoid cascading it into wrong handler
 gamesRouter.get('/:id', getGameById);
 
 module.exports = gamesRouter;

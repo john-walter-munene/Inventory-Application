@@ -1,0 +1,107 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  flex: 1;
+  padding: 130px 20px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ERROR AREA */
+.error-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.error-box {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(97, 228, 176, 0.06);
+  border: 1px solid rgba(119, 29, 29, 0.15);
+  border-radius: 16px;
+  padding: 40px 25px;
+  text-align: center;
+}
+
+.error-box h1 {
+  font-size: 72px;
+  color: rgb(119, 29, 29);
+  margin-bottom: 10px;
+}
+
+.error-box h2 {
+  font-size: 28px;
+  color: rgb(119, 29, 29);
+  margin-bottom: 15px;
+}
+
+.error-box p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* BUTTONS */
+.error-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.error-actions a {
+  text-decoration: none;
+  padding: 12px;
+  border: 2px solid rgb(119, 29, 29);
+  border-radius: 10px;
+  color: rgb(119, 29, 29);
+  font-weight: bold;
+}
+
+.error-actions a:hover {
+  background: rgb(119, 29, 29);
+  color: white;
+}
+
+/* FOOTER */
+footer {
+  background: rgb(119, 29, 29);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* DESKTOP */
+@media (min-width: 961px) {
+  main {
+    padding: 140px 80px 40px;
+  }
+
+  .error-box {
+    padding: 60px 50px;
+  }
+
+  .error-box h1 {
+    font-size: 96px;
+  }
+
+  .error-box h2 {
+    font-size: 34px;
+  }
+
+  .error-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .error-actions a {
+    min-width: 220px;
+  }
+}
