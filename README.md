@@ -2,7 +2,7 @@
 
 A full-stack inventory management web application built with **Node.js**, **Express**, **PostgreSQL**, **EJS**, and custom middleware as part of **The Odin Project NodeJS Course**.
 
-Gamies is a game inventory system where users can manage genres and games through complete CRUD functionality, including image uploads, filtering, search, validation, and responsive server-rendered views.
+[Gamies is a game inventory system](https://github.com/john-walter-munene/Inventory-Application/edit/main/README.md) where users can manage genres and games through complete CRUD functionality, including image uploads, filtering, search, validation, and responsive server-rendered views.
 
 ---
 
